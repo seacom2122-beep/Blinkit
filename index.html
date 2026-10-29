@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Drinkit — The After-Hours Delivery Club (frontend demo)</title>
+<meta name="description" content="Drinkit is a fictional drinks-delivery frontend demo for eligible adults. No real orders are taken.">
+<meta name="theme-color" content="#FAF6EF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23211425'/%3E%3Cpath d='M9 20 21 11M14 10.5h7.5V18' fill='none' stroke='%23D9F56A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip" href="#collection">Skip to drinks</a>
+
+<!-- Age & availability entry -->
+<dialog id="age" class="modal" aria-labelledby="age-title" aria-describedby="age-desc">
+  <div class="modal-body">
+    <p class="wordmark" aria-label="Drinkit">Drinkit<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17 17 7M9 6.5h8.5V15"/></svg></p>
+    <h2 id="age-title">Before you browse</h2>
+    <p id="age-desc">Please confirm that you meet the legal drinking age where you are. The age differs by country and region, so Drinkit doesn’t assume a single number.</p>
+    <p class="fine">This is a frontend demonstration. Self-confirmation is not legal identity verification, and real availability would depend on local laws and licensing.</p>
+    <div class="row">
+      <button class="btn btn-lime" id="age-yes" type="button">I meet the legal drinking age</button>
+      <button class="btn btn-ghost" id="age-no" type="button">Exit</button>
+    </div>
+  </div>
+</dialog>
+
+<section id="exit" class="exit" hidden>
+  <div>
+    <p class="wordmark">Drinkit<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17 17 7M9 6.5h8.5V15"/></svg></p>
+    <h1>Thanks for stopping by.</h1>
+    <p>This demo is only for visitors who meet the legal drinking age where they live. Reload the page to see the age confirmation again.</p>
+  </div>
+</section>
+
+<div id="app">
+<header class="site-header" id="header">
+  <div class="bar">
+    <a class="wordmark" href="#top" aria-label="Drinkit home">Drinkit<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17 17 7M9 6.5h8.5V15"/></svg></a>
+    <button class="pill loc" id="loc-btn" type="button" aria-haspopup="dialog">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.800 12 21 12 21z"/><circle cx="12" cy="9.500" r="2.500"/></svg>
+      <span id="loc-label">Set location</span>
+    </button>
+    <nav id="menu" aria-label="Primary">
+      <a href="#categories">Categories</a>
+      <a href="#collection">Drinks</a>
+      <a href="#how">How it works</a>
+      <a href="#occasions">Occasions</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="tools">
+      <button class="icon-btn" id="search-btn" type="button" aria-label="Search drinks"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.500"/><path d="m16 16 4.500 4.500"/></svg></button>
+      <button class="icon-btn cart-btn" id="cart-btn" type="button" aria-haspopup="dialog" aria-label="Open basket, 0 items"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.200 11H6.200z"/><path d="M9 8V6.500a3 3 0 0 1 6 0V8"/></svg><span class="badge" id="badge">0</span></button>
+      <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="m-open" d="M4 8h16M4 16h16"/><path class="m-close" d="m6 6 12 12M18 6 6 18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="kicker">Good taste. Less hassle.</p>
+      <h1 id="hero-title"><span class="line"><span>Your evening.</span></span><span class="line"><span>Delivered.</span></span></h1>
+      <p class="lede">Discover your next favorite pour, with an easy shopping experience and delivery options where permitted.</p>
+      <div class="row">
+        <a class="btn btn-plum" href="#collection">Explore drinks</a>
+        <a class="btn btn-ghost" href="#how">How Drinkit works</a>
+      </div>
+      <p class="fine">Frontend demo · sample content only · adults of legal drinking age</p>
+    </div>
+    <div class="stage" id="stage">
+      <div class="disc d1" data-depth="10"></div>
+      <div class="disc d2" data-depth="18"></div>
+      <div class="platform"></div>
+      <div class="prod p-wine" data-depth="26" data-art="wine" data-c="#8E4B6A"></div>
+      <div class="prod p-can" data-depth="34" data-art="can" data-c="#D9F56A"></div>
+      <div class="prod p-bag" data-depth="42" data-art="bag" data-c="#211425"></div>
+      <div class="stamp" aria-hidden="true"><svg viewBox="0 0 100 100"><defs><path id="circ" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0"/></defs><text><textPath href="#circ">After-hours delivery club · demo ·</textPath></text></svg></div>
+      <div class="float f1" data-depth="22"><b>Find your favorites</b><span>Search by name or type</span></div>
+      <div class="float f2" data-depth="30"><b>Explore by category</b><span>Six shelves to browse</span></div>
+      <div class="float f3" data-depth="16"><b>Delivery, where available</b><span>Coverage isn’t verified</span></div>
+      <aside class="receipt" data-depth="14" aria-label="Sample basket, demo content">
+        <p class="r-head">Sample basket <em>demo</em></p>
+        <p><span>Velvet Dusk Red</span><span>1×</span></p>
+        <p><span>Ginger Spark Tonic</span><span>2×</span></p>
+        <p class="r-tot"><span>Sample total</span><span>—</span></p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section id="categories" class="section" aria-labelledby="cat-title">
+    <div class="wrap">
+      <h2 id="cat-title" class="h2 reveal">Pick a shelf.</h2>
+      <div class="rail reveal" id="cat-rail" role="group" aria-label="Filter drinks by category"></div>
+    </div>
+  </section>
+
+  <!-- COLLECTION -->
+  <section id="collection" class="section tint" aria-labelledby="col-title">
+    <div class="wrap">
+      <div class="col-head">
+        <h2 id="col-title" class="h2 reveal">Find your next favorite.</h2>
+        <form class="search reveal" role="search" id="search-form">
+          <label for="q">Search drinks</label>
+          <input id="q" type="search" placeholder="Try “gin” or “red”" autocomplete="off">
+        </form>
+      </div>
+      <p class="fine" id="count" role="status">All prices are sample prices for demonstration only.</p>
+      <div class="grid" id="grid"></div>
+      <div class="empty" id="empty" hidden>
+        <h3>Nothing on this shelf matches.</h3>
+        <p>Try a different word, or clear the search and category.</p>
+        <button class="btn btn-plum" id="reset" type="button">Reset filters</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCROLL STORY -->
+  <section id="how" class="section" aria-labelledby="how-title">
+    <div class="wrap">
+      <h2 id="how-title" class="h2 reveal">From your pick to your doorstep.</h2>
+      <div class="story">
+        <div class="panel" id="panel" data-stage="1" aria-hidden="true">
+          <div class="progress"><i id="prog"></i></div>
+          <svg class="bagbig" viewBox="0 0 200 220"><path class="b-handle" d="M70 70V52a30 30 0 0 1 60 0v18"/><path class="b-body" d="M30 70h140l-10 140H40z"/><path class="b-arrow" d="M70 160 130 112M92 108h40v36"/></svg>
+          <div class="chip c1">Discover</div>
+          <div class="chip c2">2 items · sample</div>
+          <div class="chip c3">Eligibility check · demo</div>
+        </div>
+        <ol class="steps">
+          <li data-step="1"><h3>Discover your drink.</h3><p>Browse six shelves or search by name. Every product and price here is made up.</p></li>
+          <li data-step="2"><h3>Build your basket.</h3><p>Add, adjust or remove items. Your demo basket is saved in this browser only.</p></li>
+          <li data-step="3"><h3>Check delivery eligibility.</h3><p>A real service would check your age, identity and local coverage. This demo doesn’t process purchases or arrange deliveries.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- OCCASIONS -->
+  <section id="occasions" class="section tint" aria-labelledby="occ-title">
+    <div class="wrap">
+      <h2 id="occ-title" class="h2 reveal">Choose by occasion.</h2>
+      <div class="occ">
+        <article class="oc big reveal"><div data-art="wine" data-c="#8E4B6A"></div><h3>Dinner pairing</h3><p>Reds and rosés that sit well alongside a shared table.</p><button class="btn btn-plum" data-occ="wine" type="button">Browse wine</button></article>
+        <article class="oc lav reveal"><div data-art="whisky" data-c="#C79A5B"></div><h3>A thoughtful gift</h3><p>Something worth wrapping for a friend who likes to savor.</p><button class="btn btn-plum" data-occ="whisky" type="button">Browse whisky</button></article>
+        <article class="oc lime reveal"><div data-art="gin" data-c="#5E9C78"></div><h3>Discover something new</h3><p>A botanical bottle to taste slowly and talk about.</p><button class="btn btn-plum" data-occ="gin" type="button">Browse gin</button></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESPONSIBLE + FAQ -->
+  <section id="faq" class="section dark" aria-labelledby="faq-title">
+    <div class="wrap two">
+      <div>
+        <p class="enjoy">Enjoy responsibly.</p>
+        <h2 id="faq-title" class="h2">Good to know first.</h2>
+        <p>Ordering is restricted to eligible adults. Availability depends on local regulations, and a real order would need proper age and identity checks.</p>
+      </div>
+      <div class="faq" id="faq-list">
+        <div><h3><button type="button" aria-expanded="false" aria-controls="a1" id="q1">How does this demo work?</button></h3><div id="a1" role="region" aria-labelledby="q1" hidden><p>It’s a frontend prototype. You can browse, filter, search and build a basket that’s stored in your browser.</p></div></div>
+        <div><h3><button type="button" aria-expanded="false" aria-controls="a2" id="q2">Is delivery available in my location?</button></h3><div id="a2" role="region" aria-labelledby="q2" hidden><p>Unknown. The location you enter is only saved for this session. Coverage isn’t verified.</p></div></div>
+        <div><h3><button type="button" aria-expanded="false" aria-controls="a3" id="q3">How is age eligibility checked?</button></h3><div id="a3" role="region" aria-labelledby="q3" hidden><p>Here, by a simple self-confirmation, which isn’t legal verification. A real service would verify age and identity under local law.</p></div></div>
+        <div><h3><button type="button" aria-expanded="false" aria-controls="a4" id="q4">Can I place a real order?</button></h3><div id="a4" role="region" aria-labelledby="q4" hidden><p>No. There’s no payment, stock check or fulfillment behind this page.</p></div></div>
+        <div><h3><button type="button" aria-expanded="false" aria-controls="a5" id="q5">How do I modify my demo basket?</button></h3><div id="a5" role="region" aria-labelledby="q5" hidden><p>Open the basket from the top bar, then use the plus, minus and remove buttons.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final" aria-labelledby="fin-title">
+    <div class="wrap">
+      <h2 id="fin-title" class="h1 reveal">Find something worth discovering.</h2>
+      <a class="btn btn-lime" href="#collection">Explore the collection</a>
+      <div class="bob" data-art="bottle" data-c="#CEC1E8" aria-hidden="true"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap fgrid">
+    <div>
+      <p class="wordmark">Drinkit<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17 17 7M9 6.5h8.5V15"/></svg></p>
+      <p>The After-Hours Delivery Club: a fictional drinks-delivery concept for eligible adults.</p>
+    </div>
+    <nav aria-label="Footer"><a href="#categories">Categories</a><a href="#collection">Drinks</a><a href="#how">How it works</a><a href="#faq">FAQ</a></nav>
+    <div>
+      <p><strong>Enjoy responsibly.</strong> Please drink in moderation, never drive after drinking, and skip alcohol if you’re under the legal age or pregnant.</p>
+      <p class="fine">Frontend demo only. No real products, prices, licenses, payments or deliveries.</p>
+    </div>
+  </div>
+</footer>
+</div>
+
+<!-- Location -->
+<dialog id="loc-dlg" class="modal" aria-labelledby="loc-title">
+  <form class="modal-body" id="loc-form" method="dialog">
+    <h2 id="loc-title">Where are you?</h2>
+    <label for="loc-in">Locality or postal code</label>
+    <input id="loc-in" name="loc" type="text" maxlength="60" autocomplete="postal-code" required>
+    <p class="fine" id="loc-msg" role="status"></p>
+    <div class="row"><button class="btn btn-plum" type="submit">Save location</button><button class="btn btn-ghost" type="button" data-close>Close</button></div>
+  </form>
+</dialog>
+
+<!-- Cart -->
+<dialog id="cart" class="modal drawer" aria-labelledby="cart-title">
+  <div class="drawer-in">
+    <div class="d-head"><h2 id="cart-title">Demo basket</h2><button class="icon-btn" type="button" data-close aria-label="Close basket"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <ul class="lines" id="lines"></ul>
+    <div class="cart-empty" id="cart-empty"><div data-art="bag" data-c="#CEC1E8"></div><h3>Your basket is empty.</h3><p>Add a drink to see it here.</p><a class="btn btn-plum" href="#collection" data-close>Browse drinks</a></div>
+    <div class="d-foot" id="d-foot">
+      <p class="sub"><span>Subtotal (sample)</span><strong id="sub">—</strong></p>
+      <button class="btn btn-lime" id="review-btn" type="button">Review demo basket</button>
+      <p class="fine" id="review" role="status">Payment, legal verification, stock checks and delivery booking need a production backend.</p>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="script.js" defer></script>
+</body>
+</html>
